@@ -1,0 +1,83 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "dog parks",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "search",
+                    "slots": [],
+                    "samples": [
+                        "closest park near me",
+                        "where is the closest park",
+                        "show me a park",
+                        "gimme a park",
+                        "give me a park",
+                        "find a park",
+                        "find parks near me"
+                    ]
+                },
+                {
+                    "name": "AMAZON.MoreIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateSettingsIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NextIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PageUpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PageDownIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PreviousIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollRightIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollDownIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollLeftIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ScrollUpIntent",
+                    "samples": []
+                }
+            ],
+            "types": []
+        }
+    }
+}
