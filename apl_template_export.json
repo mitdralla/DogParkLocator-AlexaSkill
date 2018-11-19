@@ -1,0 +1,553 @@
+{
+    "document": {
+        "resources": [
+            {
+                "description": "Stock color for the light theme",
+                "colors": {
+                    "colorTextPrimary": "#151920"
+                }
+            },
+            {
+                "description": "Stock color for the dark theme",
+                "when": "${viewport.theme == 'dark'}",
+                "colors": {
+                    "colorTextPrimary": "#f0f1ef"
+                }
+            },
+            {
+                "description": "Standard font sizes",
+                "dimensions": {
+                    "textSizeBody": 48,
+                    "textSizePrimary": 27,
+                    "textSizeSecondary": 30,
+                    "textSizeDetails": 25,
+                    "textSizeSecondaryHint": 25
+                }
+            },
+            {
+                "description": "Common spacing values",
+                "dimensions": {
+                    "spacingThin": 6,
+                    "spacingSmall": 12,
+                    "spacingMedium": 24,
+                    "spacingLarge": 48,
+                    "spacingExtraLarge": 72
+                }
+            },
+            {
+                "description": "Common margins and padding",
+                "dimensions": {
+                    "marginTop": 40,
+                    "marginLeft": 60,
+                    "marginRight": 60,
+                    "marginBottom": 40
+                }
+            }
+        ],
+        "type": "APL",
+        "version": "1.0",
+        "theme": "dark",
+        "import": [
+            {
+                "name": "alexa-layouts",
+                "version": "1.0.0"
+            }
+        ],
+        "styles": {
+            "textStyleBase": {
+                "description": "Base font description; set color and core font family",
+                "values": [
+                    {
+                        "color": "@colorTextPrimary",
+                        "fontFamily": "Amazon Ember"
+                    }
+                ]
+            },
+            "textStyleBase0": {
+                "description": "Thin version of basic font",
+                "extend": "textStyleBase",
+                "values": {
+                    "fontWeight": "100"
+                }
+            },
+            "textStyleBase1": {
+                "description": "Light version of basic font",
+                "extend": "textStyleBase",
+                "values": {
+                    "fontWeight": "300"
+                }
+            },
+            "textStyleBase2": {
+                "description": "Regular version of basic font",
+                "extend": "textStyleBase",
+                "values": {
+                    "fontWeight": "500"
+                }
+            },
+            "mixinBody": {
+                "values": {
+                    "fontSize": "@textSizeBody"
+                }
+            },
+            "mixinPrimary": {
+                "values": {
+                    "fontSize": "@textSizePrimary"
+                }
+            },
+            "mixinDetails": {
+                "values": {
+                    "fontSize": "@textSizeDetails"
+                }
+            },
+            "mixinSecondary": {
+                "values": {
+                    "fontSize": "@textSizeSecondary"
+                }
+            },
+            "textStylePrimary": {
+                "extend": [
+                    "textStyleBase1",
+                    "mixinPrimary"
+                ]
+            },
+            "textStyleSecondary": {
+                "extend": [
+                    "textStyleBase0",
+                    "mixinSecondary"
+                ]
+            },
+            "textStyleBody": {
+                "extend": [
+                    "textStyleBase1",
+                    "mixinBody"
+                ]
+            },
+            "textStyleSecondaryHint": {
+                "values": {
+                    "fontFamily": "Bookerly",
+                    "fontStyle": "italic",
+                    "fontSize": "@textSizeSecondaryHint",
+                    "color": "@colorTextPrimary"
+                }
+            },
+            "textStyleDetails": {
+                "extend": [
+                    "textStyleBase2",
+                    "mixinDetails"
+                ]
+            }
+        },
+        "layouts": {
+            "FullHorizontalListItem": {
+                "parameters": [
+                    "listLength"
+                ],
+                "item": [
+                    {
+                        "type": "Container",
+                        "height": "100vh",
+                        "width": "100vw",
+                        "alignItems": "center",
+                        "justifyContent": "end",
+                        "items": [
+                            {
+                                "type": "Image",
+                                "position": "absolute",
+                                "height": "100vh",
+                                "width": "100vw",
+                                "overlayColor": "rgba(0, 0, 0, 0.6)",
+                                "source": "${data.image.sources[0].url}",
+                                "scale": "best-fill",
+                                "scrim": true
+                            },
+                            {
+                                "type": "AlexaHeader",
+                                "headerTitle": "${title}",
+                                "headerAttributionImage": "${logo}",
+                                "grow": 1
+                            },
+                            {
+                                "type": "Text",
+                                "text": "${data.textContent.primaryText.text}",
+                                "style": "textStyleBody",
+                                "maxLines": 1
+                            },
+                            {
+                                "type": "Text",
+                                "text": "${data.textContent.secondaryText.text}",
+                                "style": "textStyleDetails"
+                            },
+                            {
+                                "type": "Text",
+                                "text": "${ordinal} | ${listLength}",
+                                "paddingBottom": "20dp",
+                                "color": "white",
+                                "spacing": "5dp"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "HorizontalListItem": {
+                "item": [
+                    {
+                        "type": "Container",
+                        "maxWidth": 528,
+                        "minWidth": 312,
+                        "paddingLeft": 16,
+                        "paddingRight": 16,
+                        "height": "100%",
+                        "items": [
+                            {
+                                "type": "Image",
+                                "source": "${data.image.sources[0].url}",
+                                "height": "50vh",
+                                "width": "50vh"
+                            },
+                            {
+                                "type": "Text",
+                                "text": "<b>${ordinal}.</b> ${data.textContent.primaryText.text}",
+                                "style": "textStyleSecondary",
+                                "maxLines": 1,
+                                "spacing": 12
+                            },
+                            {
+                                "type": "Text",
+                                "text": "${data.textContent.secondaryText.text}",
+                                "style": "textStyleDetails",
+                                "spacing": 4
+                            }
+                        ]
+                    }
+                ]
+            },
+            "ListTemplate2": {
+                "parameters": [
+                    "backgroundImage",
+                    "title",
+                    "logo",
+                    "hintText",
+                    "listData"
+                ],
+                "items": [
+                    {
+                        "when": "${viewport.shape == 'round'}",
+                        "type": "Container",
+                        "height": "100%",
+                        "width": "100%",
+                        "items": [
+                            {
+                                "type": "Sequence",
+                                "scrollDirection": "horizontal",
+                                "data": "${listData}",
+                                "height": "100%",
+                                "width": "100%",
+                                "numbered": true,
+                                "item": [
+                                    {
+                                        "type": "FullHorizontalListItem",
+                                        "listLength": "${payload.listTemplate2ListData.listPage.listItems.length}"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Container",
+                        "height": "100vh",
+                        "items": [
+                            {
+                                "type": "Image",
+                                "source": "${backgroundImage}",
+                                "scale": "best-fill",
+                                "width": "100vw",
+                                "height": "100vh",
+                                "position": "absolute"
+                            },
+                            {
+                                "type": "AlexaHeader",
+                                "headerTitle": "${title}",
+                                "headerAttributionImage": "${logo}"
+                            },
+                            {
+                                "type": "Sequence",
+                                "scrollDirection": "horizontal",
+                                "paddingLeft": "@marginLeft",
+                                "paddingRight": "@marginRight",
+                                "data": "${listData}",
+                                "height": "70vh",
+                                "width": "100%",
+                                "numbered": true,
+                                "item": [
+                                    {
+                                        "type": "HorizontalListItem"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "AlexaFooter",
+                                "footerHint": "${payload.listTemplate2ListData.hintText}"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "mainTemplate": {
+            "parameters": [
+                "payload"
+            ],
+            "item": [
+                {
+                    "type": "ListTemplate2",
+                    "backgroundImage": "${payload.listTemplate2Metadata.backgroundImage.sources[0].url}",
+                    "title": "${payload.listTemplate2Metadata.title}",
+                    "hintText": "${payload.listTemplate2Metadata.hintText}",
+                    "logo": "${payload.listTemplate2Metadata.logoUrl}",
+                    "listData": "${payload.listTemplate2ListData.listPage.listItems}"
+                }
+            ]
+        }
+    },
+    "datasources": {
+        "listTemplate2Metadata": {
+            "type": "object",
+            "objectId": "lt1Metadata",
+            "backgroundImage": {
+                "contentDescription": null,
+                "smallSourceUrl": null,
+                "largeSourceUrl": null,
+                "sources": [
+                    {
+                        "url": "https://images.wallpaperscraft.ru/image/poverhnost_temnyy_fon_tekstura_50754_2560x1440.jpg",
+                        "size": "small",
+                        "widthPixels": 0,
+                        "heightPixels": 0
+                    },
+                    {
+                        "url": "https://cn.pling.com/img/f/4/0/a/34e6318de4b3e0702e30bfdea8d3b231271e.jpg",
+                        "size": "large",
+                        "widthPixels": 0,
+                        "heightPixels": 0
+                    }
+                ]
+            },
+            "title": "Results for \"Dog Parks Near 77065\"",
+            "logoUrl": "https://d2o906d8ln7ui1.cloudfront.net/images/cheeseskillicon.png"
+        },
+        "listTemplate2ListData": {
+            "type": "list",
+            "listId": "lt2Sample",
+            "totalNumberOfItems": 10,
+            "hintText": "Try, \"Alexa, select number 1\"",
+            "listPage": {
+                "listItems": [
+                    {
+                        "listItemIdentifier": "Wortham Park",
+                        "ordinalNumber": 1,
+                        "textContent": {
+                            "primaryText": {
+                                "type": "PlainText",
+                                "text": "Wortham Dog Park - (4.8)"
+                            },
+                            "secondaryText": {
+                                "type": "PlainText",
+                                "text": "Jersey Village, Texas, USA"
+                            }
+                        },
+                        "image": {
+                            "contentDescription": null,
+                            "smallSourceUrl": null,
+                            "largeSourceUrl": null,
+                            "sources": [
+                                {
+                                    "url": "http://farm7.static.flickr.com/6083/6136297861_f9554e6aa9.jpg",
+                                    "size": "small",
+                                    "widthPixels": 0,
+                                    "heightPixels": 0
+                                },
+                                {
+                                    "url": "http://farm7.static.flickr.com/6083/6136297861_f9554e6aa9.jpg",
+                                    "size": "large",
+                                    "widthPixels": 0,
+                                    "heightPixels": 0
+                                }
+                            ]
+                        },
+                        "token": "brie"
+                    },
+                    {
+                        "listItemIdentifier": "gruyere",
+                        "ordinalNumber": 2,
+                        "textContent": {
+                            "primaryText": {
+                                "type": "PlainText",
+                                "text": "Copperfield Dog Park - (4.2)"
+                            },
+                            "secondaryText": {
+                                "type": "RichText",
+                                "text": "Copperfield, Texas, USA"
+                            }
+                        },
+                        "image": {
+                            "contentDescription": null,
+                            "smallSourceUrl": null,
+                            "largeSourceUrl": null,
+                            "sources": [
+                                {
+                                    "url": "http://www.co.hunterdon.nj.us/photos/parks/DogPark.jpg",
+                                    "size": "small",
+                                    "widthPixels": 0,
+                                    "heightPixels": 0
+                                },
+                                {
+                                    "url": "http://www.co.hunterdon.nj.us/photos/parks/DogPark.jpg",
+                                    "size": "large",
+                                    "widthPixels": 0,
+                                    "heightPixels": 0
+                                }
+                            ]
+                        },
+                        "token": "gruyere"
+                    },
+                    {
+                        "listItemIdentifier": "gorgonzola",
+                        "ordinalNumber": 3,
+                        "textContent": {
+                            "primaryText": {
+                                "type": "PlainText",
+                                "text": "Sugarland Pawn Park - (4.1)"
+                            },
+                            "secondaryText": {
+                                "type": "RichText",
+                                "text": "Sugarland, Texas, USA"
+                            }
+                        },
+                        "image": {
+                            "contentDescription": null,
+                            "smallSourceUrl": null,
+                            "largeSourceUrl": null,
+                            "sources": [
+                                {
+                                    "url": "https://lajollamom.com/wp-content/uploads/2016/06/scooby-dog-park-san-diego.jpg",
+                                    "size": "small",
+                                    "widthPixels": 0,
+                                    "heightPixels": 0
+                                },
+                                {
+                                    "url": "https://lajollamom.com/wp-content/uploads/2016/06/scooby-dog-park-san-diego.jpg",
+                                    "size": "large",
+                                    "widthPixels": 0,
+                                    "heightPixels": 0
+                                }
+                            ]
+                        },
+                        "token": "gorgonzola"
+                    },
+                    {
+                        "listItemIdentifier": "brie",
+                        "ordinalNumber": 1,
+                        "textContent": {
+                            "primaryText": {
+                                "type": "PlainText",
+                                "text": "Spring Dog Paws - (4.2)"
+                            },
+                            "secondaryText": {
+                                "type": "PlainText",
+                                "text": "Spring, Texas, USA"
+                            }
+                        },
+                        "image": {
+                            "contentDescription": null,
+                            "smallSourceUrl": null,
+                            "largeSourceUrl": null,
+                            "sources": [
+                                {
+                                    "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTadDXGuHnKE28tIQl5H2GUMafJcijyvNBdWl0ql3bGj3XadmiLtA",
+                                    "size": "small",
+                                    "widthPixels": 0,
+                                    "heightPixels": 0
+                                },
+                                {
+                                    "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTadDXGuHnKE28tIQl5H2GUMafJcijyvNBdWl0ql3bGj3XadmiLtA",
+                                    "size": "large",
+                                    "widthPixels": 0,
+                                    "heightPixels": 0
+                                }
+                            ]
+                        },
+                        "token": "tl_brie"
+                    },
+                    {
+                        "listItemIdentifier": "gruyere",
+                        "ordinalNumber": 2,
+                        "textContent": {
+                            "primaryText": {
+                                "type": "PlainText",
+                                "text": "The Woodlands Dog Park - (4.9)"
+                            },
+                            "secondaryText": {
+                                "type": "RichText",
+                                "text": "The Woodlands, Texas, USA"
+                            }
+                        },
+                        "image": {
+                            "contentDescription": null,
+                            "smallSourceUrl": null,
+                            "largeSourceUrl": null,
+                            "sources": [
+                                {
+                                    "url": "http://culvercitycrossroads.com/wp-content/uploads/2018/03/dog-chase-day-1-Ellsworth-Dog-Park.6.15.16-1-678x381.jpg",
+                                    "size": "small",
+                                    "widthPixels": 0,
+                                    "heightPixels": 0
+                                },
+                                {
+                                    "url": "http://culvercitycrossroads.com/wp-content/uploads/2018/03/dog-chase-day-1-Ellsworth-Dog-Park.6.15.16-1-678x381.jpg",
+                                    "size": "large",
+                                    "widthPixels": 0,
+                                    "heightPixels": 0
+                                }
+                            ]
+                        },
+                        "token": "tl_gruyere"
+                    },
+                    {
+                        "listItemIdentifier": "gorgonzola",
+                        "ordinalNumber": 3,
+                        "textContent": {
+                            "primaryText": {
+                                "type": "PlainText",
+                                "text": "Herman Dog Park Pct. 2 - (4.5)"
+                            },
+                            "secondaryText": {
+                                "type": "RichText",
+                                "text": "Houston, Texas, USA"
+                            }
+                        },
+                        "image": {
+                            "contentDescription": null,
+                            "smallSourceUrl": null,
+                            "largeSourceUrl": null,
+                            "sources": [
+                                {
+                                    "url": "http://www.dogparkproduct.com/userfiles/image/US%20BP%20BARK-NVKIT%20Novice%20Course%20660%20x%20330.jpg",
+                                    "size": "small",
+                                    "widthPixels": 0,
+                                    "heightPixels": 0
+                                },
+                                {
+                                    "url": "http://www.dogparkproduct.com/userfiles/image/US%20BP%20BARK-NVKIT%20Novice%20Course%20660%20x%20330.jpg",
+                                    "size": "large",
+                                    "widthPixels": 0,
+                                    "heightPixels": 0
+                                }
+                            ]
+                        },
+                        "token": "tl_gorgonzola"
+                    }
+                ]
+            }
+        }
+    }
+}
